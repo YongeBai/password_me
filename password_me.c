@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
     srand(time(NULL));
-    int num_uppercase = 3, num_lowercase = 3, num_digits = 3, num_special = 3;
-    int password_length = num_uppercase + num_lowercase + num_digits + num_special;
+    int num_uppercase = 1, num_lowercase = 3, num_digits = 3, num_special = 1;
 
     char uppercase[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
                         'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
@@ -18,11 +18,36 @@ int main(int argc, char const *argv[])
     char special[] = {'!', '@', '#', '$', '%', '^', '&', '*', '(', ')',
                       '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\',
                       ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/'};
-    
+    int opt;
+
+    while ((opt = getopt(argc, argv, "u:l:d:s:")) != -1)
+    {
+        switch (opt)
+        {
+        case 'u':
+            num_uppercase = atoi(optarg);
+            break;
+        case 'l':
+            num_lowercase = atoi(optarg);
+            break;
+        case 'd':
+            num_digits = atoi(optarg);
+            break;
+        case 's':
+            num_special = atoi(optarg);
+            break;
+        default:
+            fprintf(stderr, "Usage: %s [-u uppercase] [-l lowercase] [-d digits] [-s special]\n", argv[0]);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    printf("%d %d %d %d\n", num_uppercase, num_lowercase, num_digits, num_special);
+    int password_length = num_uppercase + num_lowercase + num_digits + num_special;
     char password[password_length];
     int filled[password_length];
 
-    for (int i = 0; i <= password_length+1; i++)
+    for (int i = 0; i < password_length; i++)
     {
         int randomIdx = rand() % password_length;
         if (filled[randomIdx] == 1)
@@ -53,7 +78,7 @@ int main(int argc, char const *argv[])
             num_special--;
         }
     }
-    printf("Password: %s\n", password);
+    printf("%s\n", password);
 
     return 0;
 }
