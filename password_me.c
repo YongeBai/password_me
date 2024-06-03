@@ -42,7 +42,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    printf("%d %d %d %d\n", num_uppercase, num_lowercase, num_digits, num_special);
     int password_length = num_uppercase + num_lowercase + num_digits + num_special;
     char password[password_length];
     int filled[password_length];
