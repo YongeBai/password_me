@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     srand(time(NULL));
-    int num_uppercase = 1, num_lowercase = 3, num_digits = 3, num_special = 1;
+    int num_uppercase = 3, num_lowercase = 3, num_digits = 3, num_special = 3;
 
     char uppercase[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
                         'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
                         'u', 'v', 'w', 'x', 'y', 'z'};
     char digits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     char special[] = {'!', '@', '#', '$', '%', '^', '&', '*', '(', ')',
-                      '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\',
+                      '-', '_', '+', '=', '{', '}', '[', ']', '|',
                       ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/'};
     int opt;
 
@@ -77,6 +77,7 @@ int main(int argc, char *argv[])
             num_special--;
         }
     }
+    password[password_length+1] = '\0';
     printf("%s\n", password);
 
     return 0;
